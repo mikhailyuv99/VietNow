@@ -6,7 +6,9 @@
 // The anon key is safe to expose in the browser. The database only allows
 // read access on the `messages` table thanks to Row-Level Security.
 window.VN_CONFIG = {
-  supabaseUrl: "https://YOUR-PROJECT.supabase.co",
+  // Project ref: wzopkceshvypksgpjzsx (VietNow)
+  supabaseUrl: "https://wzopkceshvypksgpjzsx.supabase.co",
+  // Paste the green "anon" "public" key you copied (Settings → API → Legacy keys):
   supabaseAnonKey: "YOUR-ANON-PUBLIC-KEY",
   telegramChannel: "your_telegram_invite",
 };
