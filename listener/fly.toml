@@ -1,0 +1,26 @@
+# Fly.io config. Edit app name and region, then run:
+#   fly launch --no-deploy   (accept existing fly.toml)
+#   fly volumes create vn_listener_data --size 1
+#   fly secrets set TG_API_ID=... TG_API_HASH=... TG_CHANNEL=... SUPABASE_URL=... SUPABASE_SERVICE_KEY=... OPENAI_API_KEY=...
+#   fly deploy
+app = "vn-listener"
+primary_region = "sin"
+
+[build]
+
+[env]
+  TG_SESSION = "/data/vn_listener.session"
+
+[[mounts]]
+  source = "vn_listener_data"
+  destination = "/data"
+
+[processes]
+  worker = "python live.py"
+
+[[services]]
+  # no public service; this is a worker
+  internal_port = 0
+  protocol = "tcp"
+  auto_stop_machines = false
+  auto_start_machines = true

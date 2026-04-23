@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>Cities — Russians in Vietnam</title>
+    <meta name="description" content="Find your city community in Vietnam: Hanoi, HCMC (Saigon), Da Nang, Nha Trang, Phu Quoc and more." />
+
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar-inner">
+          <a class="brand" href="../">
+            <span class="brand-badge">VN</span>
+            <span>
+              Russians in Vietnam
+              <small>City communities directory</small>
+            </span>
+          </a>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="../">Home</a>
+            <a href="./" aria-current="page">Cities</a>
+            <a href="../business/">Businesses</a>
+            <a href="../guides/">Guides</a>
+            <a href="../search/">Search</a>
+            <a href="../about/">About</a>
+          </nav>
+
+          <div class="actions">
+            <a class="btn btn-primary btn-small btn-wide" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">
+              Join Telegram
+            </a>
+            <button class="btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav" type="button">Menu</button>
+          </div>
+        </div>
+
+        <div class="mobile-nav" id="mobileNav">
+          <div class="grid">
+            <a href="../">Home</a>
+            <a href="./" aria-current="page">Cities</a>
+            <a href="../business/">Businesses</a>
+            <a href="../guides/">Guides</a>
+            <a href="../search/">Search</a>
+            <a href="../about/">About</a>
+            <a class="btn btn-primary" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">Join Telegram</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-title">
+        <div class="container">
+          <div class="breadcrumbs">Home / Cities</div>
+          <h1>City communities</h1>
+          <p class="lead" style="margin-bottom:0;">
+            Find your city hub, then join Telegram to ask local questions, buy/sell, find services, and meet people.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="toolbar">
+            <div class="input" role="search">
+              <span style="color:rgba(255,255,255,.55); font-weight:800;">⌕</span>
+              <label class="sr-only" for="searchInput">Search cities</label>
+              <input id="searchInput" placeholder="Search: Hanoi, Saigon, Da Nang, Nha Trang…" autocomplete="off" />
+            </div>
+
+            <div class="pill-row" aria-label="Filters">
+              <button class="pill" data-filter="all" aria-pressed="true" type="button">All</button>
+              <button class="pill" data-filter="north" aria-pressed="false" type="button">North</button>
+              <button class="pill" data-filter="central" aria-pressed="false" type="button">Central</button>
+              <button class="pill" data-filter="south" aria-pressed="false" type="button">South</button>
+              <button class="pill" data-filter="island" aria-pressed="false" type="button">Islands</button>
+            </div>
+          </div>
+
+          <p style="margin: 0 0 12px; color: rgba(255,255,255,.55); font-weight: 700;">
+            Showing <span id="resultsCount">0</span> cities
+          </p>
+
+          <div class="cards">
+            <div class="card" id="hcmc" data-tags="south" data-search="ho chi minh hcmc saigon district 1 district 2 thu duc">
+              <h3>Ho Chi Minh City (Saigon)</h3>
+              <p>Largest community. Great for business, services, networking.</p>
+              <div class="tags">
+                <span class="tag"><strong>Region</strong> South</span>
+                <span class="tag">Business</span>
+                <span class="tag">Rentals</span>
+              </div>
+              <div style="margin-top:12px;" class="hero-actions">
+                <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_city_hcmc" target="_blank" rel="noreferrer">City Telegram</a>
+                <a class="btn btn-small" href="../guides/#hcmc">Local tips</a>
+              </div>
+            </div>
+
+            <div class="card" id="hanoi" data-tags="north" data-search="hanoi tay ho long bien cau giay">
+              <h3>Hanoi</h3>
+              <p>Capital city. Great for north travel, families, longer stays.</p>
+              <div class="tags">
+                <span class="tag"><strong>Region</strong> North</span>
+                <span class="tag">Family</span>
+                <span class="tag">Culture</span>
+              </div>
+              <div style="margin-top:12px;" class="hero-actions">
+                <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_city_hanoi" target="_blank" rel="noreferrer">City Telegram</a>
+                <a class="btn btn-small" href="../guides/#hanoi">Local tips</a>
+              </div>
+            </div>
+
+            <div class="card" id="danang" data-tags="central" data-search="da nang danang son tra my khe hoi an">
+              <h3>Da Nang</h3>
+              <p>Beach lifestyle with city comfort. Central base (Hoi An nearby).</p>
+              <div class="tags">
+                <span class="tag"><strong>Region</strong> Central</span>
+                <span class="tag">Remote work</span>
+                <span class="tag">Beach</span>
+              </div>
+              <div style="margin-top:12px;" class="hero-actions">
+                <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_city_danang" target="_blank" rel="noreferrer">City Telegram</a>
+                <a class="btn btn-small" href="../guides/#danang">Local tips</a>
+              </div>
+            </div>
+
+            <div class="card" id="nhatrang" data-tags="central" data-search="nha trang nhatrang cam ranh">
+              <h3>Nha Trang</h3>
+              <p>Resort city and long-stay expat scene. Beach + services.</p>
+              <div class="tags">
+                <span class="tag"><strong>Region</strong> Central</span>
+                <span class="tag">Long stay</span>
+                <span class="tag">Beach</span>
+              </div>
+              <div style="margin-top:12px;" class="hero-actions">
+                <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_city_nhatrang" target="_blank" rel="noreferrer">City Telegram</a>
+                <a class="btn btn-small" href="../guides/#nhatrang">Local tips</a>
+              </div>
+            </div>
+
+            <div class="card" id="phuquoc" data-tags="island,south" data-search="phu quoc phuquoc island">
+              <h3>Phu Quoc</h3>
+              <p>Island life. Great for tourism and remote work seasons.</p>
+              <div class="tags">
+                <span class="tag"><strong>Region</strong> Island</span>
+                <span class="tag">Tourism</span>
+                <span class="tag">Nature</span>
+              </div>
+              <div style="margin-top:12px;" class="hero-actions">
+                <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_city_phuquoc" target="_blank" rel="noreferrer">City Telegram</a>
+                <a class="btn btn-small" href="../guides/#phuquoc">Local tips</a>
+              </div>
+            </div>
+
+            <div class="card" id="vungtau" data-tags="south" data-search="vung tau vungtau">
+              <h3>Vung Tau</h3>
+              <p>Weekend escape from HCMC. Beach town with growing expat scene.</p>
+              <div class="tags">
+                <span class="tag"><strong>Region</strong> South</span>
+                <span class="tag">Weekend</span>
+                <span class="tag">Beach</span>
+              </div>
+              <div style="margin-top:12px;" class="hero-actions">
+                <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_city_vungtau" target="_blank" rel="noreferrer">City Telegram</a>
+                <a class="btn btn-small" href="../guides/#vungtau">Local tips</a>
+              </div>
+            </div>
+
+            <div class="card" id="dalat" data-tags="south,central" data-search="da lat dalat lam dong">
+              <h3>Da Lat</h3>
+              <p>Cooler climate. Coffee shops, nature, long-stay comfort.</p>
+              <div class="tags">
+                <span class="tag"><strong>Region</strong> Highlands</span>
+                <span class="tag">Climate</span>
+                <span class="tag">Nature</span>
+              </div>
+              <div style="margin-top:12px;" class="hero-actions">
+                <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_city_dalat" target="_blank" rel="noreferrer">City Telegram</a>
+                <a class="btn btn-small" href="../guides/#dalat">Local tips</a>
+              </div>
+            </div>
+
+            <div class="card" id="haiphong" data-tags="north" data-search="hai phong haiphong cat ba">
+              <h3>Hai Phong / Cat Ba</h3>
+              <p>Port city and gateway to islands. Great for north trips.</p>
+              <div class="tags">
+                <span class="tag"><strong>Region</strong> North</span>
+                <span class="tag">Travel</span>
+                <span class="tag">Islands</span>
+              </div>
+              <div style="margin-top:12px;" class="hero-actions">
+                <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_city_haiphong" target="_blank" rel="noreferrer">City Telegram</a>
+                <a class="btn btn-small" href="../guides/#haiphong">Local tips</a>
+              </div>
+            </div>
+
+            <div class="card" id="mui-ne" data-tags="south" data-search="mui ne muine phan thiet">
+              <h3>Mũi Né / Phan Thiết</h3>
+              <p>Beach + kitesurf. Long-stay friendly, quieter pace.</p>
+              <div class="tags">
+                <span class="tag"><strong>Region</strong> South</span>
+                <span class="tag">Kitesurf</span>
+                <span class="tag">Long stay</span>
+              </div>
+              <div style="margin-top:12px;" class="hero-actions">
+                <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_city_muine" target="_blank" rel="noreferrer">City Telegram</a>
+                <a class="btn btn-small" href="../guides/#muine">Local tips</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta" style="margin-top:16px;">
+            <div>
+              <h3 style="margin:0 0 6px; font-size:16px;">Add a city</h3>
+              <p>Admins can add a new card in minutes. You can also link city Telegram chats (one per city).</p>
+            </div>
+            <div class="hero-actions">
+              <a class="btn btn-primary btn-wide" href="../about/#contact">Contact admins</a>
+              <a class="btn" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">Main Telegram</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand" style="margin-bottom:10px;">
+              <span class="brand-badge">VN</span>
+              <span>
+                Russians in Vietnam
+                <small>Cities directory</small>
+              </span>
+            </div>
+            <p>Pick a city hub and join Telegram to meet locals and expats.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">Join Telegram</a>
+            </div>
+          </div>
+          <div>
+            <h3>Sections</h3>
+            <ul class="list">
+              <li><a href="../business/">Businesses</a></li>
+              <li><a href="../guides/">Guides</a></li>
+              <li><a href="../about/">About</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Admin</h3>
+            <ul class="list">
+              <li><a href="../about/#contact">Add / edit a city</a></li>
+              <li><a href="../about/#rules">Rules</a></li>
+            </ul>
+            <p style="margin-top:10px;"><small>Tip: keep city cards consistent and link to a dedicated city Telegram chat.</small></p>
+          </div>
+        </div>
+        <div style="margin-top:16px; color: rgba(255,255,255,.45); font-weight:650;">
+          <small>© <span id="year"></span> Russians in Vietnam.</small>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../assets/app.js"></script>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
+

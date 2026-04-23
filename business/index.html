@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>Businesses — Russians in Vietnam</title>
+    <meta
+      name="description"
+      content="Directory of Russian-friendly and expat-trusted businesses in Vietnam: housing, visa/legal, healthcare, tours, food, services."
+    />
+
+    <link rel="stylesheet" href="../assets/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar-inner">
+          <a class="brand" href="../">
+            <span class="brand-badge">VN</span>
+            <span>
+              Russians in Vietnam
+              <small>Business directory</small>
+            </span>
+          </a>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="../">Home</a>
+            <a href="../cities/">Cities</a>
+            <a href="./" aria-current="page">Businesses</a>
+            <a href="../guides/">Guides</a>
+            <a href="../search/">Search</a>
+            <a href="../about/">About</a>
+          </nav>
+
+          <div class="actions">
+            <a class="btn btn-primary btn-small btn-wide" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">
+              Join Telegram
+            </a>
+            <button class="btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav" type="button">Menu</button>
+          </div>
+        </div>
+
+        <div class="mobile-nav" id="mobileNav">
+          <div class="grid">
+            <a href="../">Home</a>
+            <a href="../cities/">Cities</a>
+            <a href="./" aria-current="page">Businesses</a>
+            <a href="../guides/">Guides</a>
+            <a href="../search/">Search</a>
+            <a href="../about/">About</a>
+            <a class="btn btn-primary" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">Join Telegram</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-title">
+        <div class="container">
+          <div class="breadcrumbs">Home / Businesses</div>
+          <h1>Businesses & services</h1>
+          <p class="lead" style="margin-bottom:0;">
+            A clean directory for expat-trusted services. Keep it curated: real contacts, clear categories, and transparent notes.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="toolbar">
+            <div class="input" role="search">
+              <span style="color:rgba(15,23,42,.40); font-weight:800;">⌕</span>
+              <label class="sr-only" for="searchInput">Search businesses</label>
+              <input id="searchInput" placeholder="Search: visa, rent, dentist, tour, café…" autocomplete="off" />
+            </div>
+
+            <div class="pill-row" aria-label="Filters">
+              <button class="pill" data-filter="all" aria-pressed="true" type="button">All</button>
+              <button class="pill" data-filter="housing" aria-pressed="false" type="button">Housing</button>
+              <button class="pill" data-filter="legal" aria-pressed="false" type="button">Visa/Legal</button>
+              <button class="pill" data-filter="health" aria-pressed="false" type="button">Health</button>
+              <button class="pill" data-filter="food" aria-pressed="false" type="button">Food</button>
+              <button class="pill" data-filter="tours" aria-pressed="false" type="button">Tours</button>
+              <button class="pill" data-filter="services" aria-pressed="false" type="button">Services</button>
+            </div>
+          </div>
+
+          <p style="margin: 0 0 12px; color: rgba(15,23,42,.55); font-weight: 650;">
+            Showing <span id="resultsCount">0</span> listings
+          </p>
+
+          <div class="cards">
+            <div class="card" id="housing" data-tags="housing" data-search="housing rentals apartment agent hcmc hanoi danang">
+              <h3>Housing & rentals</h3>
+              <p>Agents, apartment search, short-term stays, co-living. (Add trusted contacts per city.)</p>
+              <div class="tags">
+                <span class="tag"><strong>Category</strong> Housing</span>
+                <span class="tag">Newcomers</span>
+              </div>
+              <div class="notice" style="margin-top:12px;">
+                <strong>Suggested format:</strong> Name · City · WhatsApp/Telegram · Notes (deposit, contract language, English/Russian).
+              </div>
+            </div>
+
+            <div class="card" id="legal" data-tags="legal" data-search="visa trc work permit legal lawyer translation notarization">
+              <h3>Visa & legal support</h3>
+              <p>Visas, TRC, work permits, business registration, translations. Keep entries accurate and up to date.</p>
+              <div class="tags">
+                <span class="tag"><strong>Category</strong> Visa/Legal</span>
+                <span class="tag">Documents</span>
+              </div>
+              <div style="margin-top:12px;" class="hero-actions">
+                <a class="btn btn-small" href="../guides/#visa">Visa basics</a>
+                <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">Ask in Telegram</a>
+              </div>
+            </div>
+
+            <div class="card" id="health" data-tags="health" data-search="doctor clinic dentist hospital insurance pharmacy">
+              <h3>Healthcare</h3>
+              <p>Clinics, dentists, hospitals, insurance help. Add “languages spoken” and booking steps.</p>
+              <div class="tags">
+                <span class="tag"><strong>Category</strong> Health</span>
+                <span class="tag">Emergency</span>
+              </div>
+            </div>
+
+            <div class="card" id="food" data-tags="food" data-search="restaurant cafe bakery delivery russian food">
+              <h3>Food, cafés, delivery</h3>
+              <p>Community favorites: meetups, cowork-friendly cafés, delivery options.</p>
+              <div class="tags">
+                <span class="tag"><strong>Category</strong> Food</span>
+                <span class="tag">Meetups</span>
+              </div>
+            </div>
+
+            <div class="card" id="tours" data-tags="tours" data-search="tours travel guide ha long sapa mekong scuba">
+              <h3>Tours & travel</h3>
+              <p>Trusted guides and agencies. Add clear pricing notes and what’s included.</p>
+              <div class="tags">
+                <span class="tag"><strong>Category</strong> Tours</span>
+                <span class="tag">Weekend</span>
+              </div>
+            </div>
+
+            <div class="card" id="services" data-tags="services" data-search="services repair scooter motorbike sim bank accountant it">
+              <h3>Everyday services</h3>
+              <p>SIM cards, motorbike rentals/repairs, accountants, IT help, moving.</p>
+              <div class="tags">
+                <span class="tag"><strong>Category</strong> Services</span>
+                <span class="tag">Daily life</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta" style="margin-top:16px;">
+            <div>
+              <h3 style="margin:0 0 6px; font-size:16px;">Add your business</h3>
+              <p>Keep submissions clean: city, category, contact, and a short description. Admins curate the list.</p>
+            </div>
+            <div class="hero-actions">
+              <a class="btn btn-primary btn-wide" href="../about/#contact">Submit listing</a>
+              <a class="btn" href="../cities/">Pick a city</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand" style="margin-bottom:10px;">
+              <span class="brand-badge">VN</span>
+              <span>
+                Russians in Vietnam
+                <small>Business directory</small>
+              </span>
+            </div>
+            <p>Telegram is the fastest way to validate recommendations.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">Join Telegram</a>
+            </div>
+          </div>
+          <div>
+            <h3>Sections</h3>
+            <ul class="list">
+              <li><a href="../cities/">Cities</a></li>
+              <li><a href="../guides/">Guides</a></li>
+              <li><a href="../about/">About</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Admin</h3>
+            <ul class="list">
+              <li><a href="../about/#contact">Submit listing</a></li>
+              <li><a href="../about/#rules">Rules</a></li>
+            </ul>
+            <p style="margin-top:10px;"><small>Tip: consider a “Verified” badge process via Telegram admins.</small></p>
+          </div>
+        </div>
+        <div style="margin-top:16px; color: rgba(15,23,42,.55); font-weight:650;">
+          <small>© <span id="year"></span> Russians in Vietnam.</small>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../assets/app.js"></script>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
+

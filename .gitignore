@@ -1,0 +1,22 @@
+# Secrets
+.env
+**/.env
+*.session
+*.session-journal
+
+# If you copy real keys into config, keep a local override (optional)
+# assets/config.local.js
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OS / editor
+Thumbs.db
+.DS_Store
+*.swp
+.vscode/
+.idea/

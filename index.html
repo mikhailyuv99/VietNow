@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>Russians in Vietnam — Community, Cities, Businesses</title>
+    <meta
+      name="description"
+      content="A modern community platform for Russians in Vietnam: city hubs, trusted businesses, practical guides, and a Telegram chat to connect."
+    />
+
+    <meta property="og:title" content="Russians in Vietnam" />
+    <meta
+      property="og:description"
+      content="City communities, businesses, and guides for Russians living, traveling, or working in Vietnam."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230f172a'/%3E%3Cpath d='M19 39c7-14 19-14 26 0' fill='none' stroke='%23ffffff' stroke-width='6' stroke-linecap='round'/%3E%3Ccircle cx='27' cy='26' r='4' fill='%23ffffff'/%3E%3Ccircle cx='39' cy='26' r='4' fill='%23ffffff'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <div class="topbar-inner">
+          <a class="brand" href="./">
+            <span class="brand-badge">VN</span>
+            <span>
+              Russians in Vietnam
+              <small>Community platform + Telegram</small>
+            </span>
+          </a>
+
+          <nav class="nav" aria-label="Primary">
+            <a href="./" aria-current="page">Home</a>
+            <a href="./cities/">Cities</a>
+            <a href="./business/">Businesses</a>
+            <a href="./guides/">Guides</a>
+            <a href="./search/">Search</a>
+            <a href="./about/">About</a>
+          </nav>
+
+          <div class="actions">
+            <a class="btn btn-ghost btn-small" href="./search/">Search the chat</a>
+            <a class="btn btn-primary btn-small btn-wide" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">
+              Join Telegram
+            </a>
+            <button class="btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav" type="button">
+              Menu
+            </button>
+          </div>
+        </div>
+
+        <div class="mobile-nav" id="mobileNav">
+          <div class="grid">
+            <a href="./" aria-current="page">Home</a>
+            <a href="./cities/">Cities</a>
+            <a href="./business/">Businesses</a>
+            <a href="./guides/">Guides</a>
+            <a href="./search/">Search</a>
+            <a href="./about/">About</a>
+            <a class="btn btn-primary" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">Join Telegram</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <span class="kicker"><span class="dot"></span> Front page for the Telegram community</span>
+          <h1>Russians in Vietnam.</h1>
+          <p class="lead">
+            Minimal website for a Telegram community: city hubs, a small business directory, and practical guides for Russians in Vietnam.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-wide" href="./search/">Search the chat</a>
+            <a class="btn" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">Join Telegram</a>
+            <a class="btn" href="./cities/">Cities</a>
+            <a class="btn" href="./business/">Businesses</a>
+            <a class="btn" href="./guides/">Guides</a>
+          </div>
+
+          <div class="notice" style="max-width: 72ch;">
+            <strong>Admin:</strong> replace the Telegram link placeholder (<code>https://t.me/your_telegram_invite</code>) with your real invite link.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Search the community chat</h2>
+              <p>Type what you need — "hotel Hanoi", "marketer Da Nang", "visa extension" — and get real messages from the Telegram channel. Works in Russian, English, and Vietnamese.</p>
+            </div>
+            <a class="btn btn-primary btn-small" href="./search/">Open search</a>
+          </div>
+
+          <div class="cards">
+            <a class="card" href="./search/?q=hotel&amp;city=Hanoi">
+              <h3>Hotel in Hanoi</h3>
+              <p>Find places to stay recommended by the community.</p>
+            </a>
+            <a class="card" href="./search/?q=marketer&amp;city=Da%20Nang">
+              <h3>Marketer in Da Nang</h3>
+              <p>Freelancers and agencies mentioned in the chat.</p>
+            </a>
+            <a class="card" href="./search/?cat=visa_legal&amp;t=3month">
+              <h3>Visa &amp; legal help</h3>
+              <p>Recent discussions about TRC, work permits, visa runs.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>City hubs</h2>
+              <p>Pick your city to find the right chat and local tips.</p>
+            </div>
+            <a class="btn btn-small" href="./cities/">See all cities</a>
+          </div>
+
+          <div class="cards">
+            <a class="card" href="./cities/#hcmc" data-search="ho chi minh hcmc saigon">
+              <h3>Ho Chi Minh City (Saigon)</h3>
+              <p>Community, services, and business.</p>
+            </a>
+            <a class="card" href="./cities/#hanoi" data-search="hanoi">
+              <h3>Hanoi</h3>
+              <p>Capital city hub and north base.</p>
+            </a>
+            <a class="card" href="./cities/#danang" data-search="da nang danang hoi an">
+              <h3>Da Nang</h3>
+              <p>Beach lifestyle and central Vietnam.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Businesses</h2>
+              <p>A small, curated directory for Russian-friendly and expat-trusted services.</p>
+            </div>
+            <a class="btn btn-small" href="./business/">Open directory</a>
+          </div>
+
+          <div class="cards">
+            <a class="card" href="./business/#housing" data-search="rent apartment agent housing">
+              <h3>Housing & rentals</h3>
+              <p>Apartments, agents, short-term stays.</p>
+            </a>
+            <a class="card" href="./business/#legal" data-search="visa trc work permit legal">
+              <h3>Visa & legal support</h3>
+              <p>Visas, TRC, work permits, translations.</p>
+            </a>
+            <a class="card" href="./business/#food" data-search="restaurant cafe delivery">
+              <h3>Food & cafés</h3>
+              <p>Community favorites and meetups.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand" style="margin-bottom:10px;">
+              <span class="brand-badge">VN</span>
+              <span>
+                Russians in Vietnam
+                <small>Telegram community + website</small>
+              </span>
+            </div>
+            <p>A minimal front page for a Telegram community.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-primary btn-small" href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">Join Telegram</a>
+            </div>
+          </div>
+
+          <div>
+            <h3>Sections</h3>
+            <ul class="list">
+              <li><a href="./search/">Search the chat</a></li>
+              <li><a href="./cities/">Cities</a></li>
+              <li><a href="./business/">Businesses</a></li>
+              <li><a href="./guides/">Guides</a></li>
+              <li><a href="./about/">About</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3>Admin</h3>
+            <ul class="list">
+              <li><a href="./about/#contact">Contact / add a city</a></li>
+              <li><a href="./about/#rules">Community rules</a></li>
+            </ul>
+            <p style="margin-top:10px;"><small>Built as a simple static website: fast, cheap to host, easy to edit.</small></p>
+          </div>
+        </div>
+
+        <div style="margin-top:16px; color: rgba(15,23,42,.55); font-weight:650;">
+          <small>© <span id="year"></span> Russians in Vietnam. Unofficial community resource.</small>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./assets/app.js"></script>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
+

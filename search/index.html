@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>Search Vietnam — Russians in Vietnam</title>
+    <meta
+      name="description"
+      content="Search the Russians-in-Vietnam Telegram community for hotels, services, freelancers, visa tips and more. Available in Russian, English and Vietnamese."
+    />
+
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232563eb'/%3E%3Cpath d='M24 28a8 8 0 1 1 14 5l6 6' fill='none' stroke='%23ffffff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E" />
+  </head>
+  <body class="search-app">
+
+    <!-- Minimal top bar: brand + Login / Sign up ---------------------- -->
+    <header class="mini-bar">
+      <div class="container">
+        <div class="mini-bar-inner">
+          <a class="brand" href="../" aria-label="Home">
+            <span class="brand-badge" style="background: var(--brand-blue);">VN</span>
+            <span>Russians in Vietnam<small>Search the chat</small></span>
+          </a>
+
+          <div class="mini-bar-actions">
+            <button class="link-btn" type="button" data-auth-open="login">Login</button>
+            <button class="brand-btn" type="button" data-auth-open="register">Sign up</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero search --------------------------------------------------- -->
+    <main>
+      <section class="hero-wrap">
+        <div class="hero-inner">
+          <span class="hero-eyebrow"><span class="dot"></span> Powered by the community Telegram</span>
+          <h1 class="hero-title">
+            What are you searching for <span class="accent">in Vietnam?</span>
+          </h1>
+          <p class="hero-sub">
+            Real answers from real residents. Hotels, scooter rentals, visa help, freelancers, cafés —
+            whatever you need, the community has probably talked about it.
+          </p>
+
+          <form class="hero-search" id="heroSearch" role="search" autocomplete="off">
+            <span class="icon" aria-hidden="true">⌕</span>
+            <label class="sr-only" for="searchInput">Search the Telegram community</label>
+            <input id="searchInput" type="search" placeholder="Try &quot;hotel in Hanoi&quot; or &quot;marketer in Da Nang&quot;…" />
+            <button class="go" type="submit">Search</button>
+          </form>
+
+          <div class="hero-suggest" aria-label="Popular searches">
+            <button type="button" class="chip-suggest" data-suggest="hotel Hanoi">Hotel in Hanoi</button>
+            <button type="button" class="chip-suggest" data-suggest="marketer Da Nang">Marketer in Da Nang</button>
+            <button type="button" class="chip-suggest" data-suggest="visa extension">Visa extension</button>
+            <button type="button" class="chip-suggest" data-suggest="scooter rent">Scooter rental</button>
+            <button type="button" class="chip-suggest" data-suggest="russian doctor">Russian-speaking doctor</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results + filters appear only after a search has been made -->
+      <section class="results-wrap hidden" id="resultsWrap">
+        <div class="results-toolbar">
+          <small><span id="resultsCount">0</span> <span id="resultsNoun">results</span></small>
+          <div class="toolbar-filters">
+            <div class="pill-row" id="timeRange" aria-label="Time range"></div>
+            <div class="pill-row" id="langToggle" aria-label="Show results in"></div>
+          </div>
+        </div>
+        <div class="toolbar-filters" style="justify-content:center;">
+          <div class="pill-row" id="categoryChips" aria-label="Categories"></div>
+        </div>
+        <div class="toolbar-filters" style="justify-content:center;">
+          <div class="pill-row" id="cityChips" aria-label="Cities"></div>
+        </div>
+
+        <div id="results" aria-live="polite"></div>
+        <small id="searchStatus" style="text-align:center; color: var(--muted-2); min-height: 1.2em;"></small>
+        <button class="btn" id="loadMoreBtn" type="button" style="display:none;">Show more</button>
+      </section>
+
+      <!-- FAQ ------------------------------------------------------- -->
+      <section class="faq-section" aria-labelledby="faqTitle">
+        <h2 id="faqTitle">Frequently asked questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Do I need a Telegram account to use this search?</summary>
+            <p>No. You can search and read everything from the website. Only if you want to reply to a post or join the conversation do you need Telegram — clicking "Open in Telegram" on any result will take you there.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Is this available in English and Vietnamese?</summary>
+            <p>Yes. Most messages are written in Russian by the community, but each message is automatically translated into English and Vietnamese. Switch the language with the RU / EN / VI toggle above the results.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How fresh are the results?</summary>
+            <p>New messages usually appear within a minute. You can filter by the last hour, 24 hours, week, month, or year to focus on what's most relevant to you.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How does search work under the hood?</summary>
+            <p>A small service reads the public community channel, tags each message by topic and city, and translates it. The website then searches those messages — just like a mini Google over the chat.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I add my business or remove a message?</summary>
+            <p>Yes. Use the chat bubble in the bottom right corner, or email us through the Contact link in the footer. We review every request manually.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <!-- Legal footer -------------------------------------------------- -->
+    <footer class="legal-footer">
+      <div class="container legal-inner">
+        <span>© <span id="year"></span> Russians in Vietnam. Unofficial community resource.</span>
+        <nav class="legal-links" aria-label="Legal">
+          <a href="../about/">About</a>
+          <a href="../about/#rules">Terms</a>
+          <a href="../about/#contact">Privacy</a>
+          <a href="#" data-chatbox-open>Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Auth modal --------------------------------------------------- -->
+    <div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle" hidden>
+      <div class="modal">
+        <button class="modal-close" type="button" aria-label="Close" data-auth-close>×</button>
+        <h3 id="authTitle">Welcome</h3>
+        <p class="modal-sub" id="authSub">Sign in to save searches and get alerts (coming soon).</p>
+
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"  data-auth-tab="login">Login</button>
+          <button type="button" role="tab" aria-selected="false" data-auth-tab="register">Sign up</button>
+        </div>
+
+        <form class="modal-form" id="authForm" novalidate>
+          <label>Email
+            <input type="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+          </label>
+          <label>Password
+            <input type="password" name="password" required minlength="6" autocomplete="current-password" placeholder="••••••••" />
+          </label>
+          <button class="btn-submit" type="submit" id="authSubmit">Login</button>
+          <div class="form-status" id="authStatus" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Floating contact chatbox ------------------------------------- -->
+    <button class="chatbox-btn" id="chatboxBtn" type="button" aria-expanded="false" aria-controls="chatboxPanel" aria-label="Contact us">
+      <span aria-hidden="true">✦</span>
+    </button>
+    <aside class="chatbox-panel" id="chatboxPanel" role="dialog" aria-labelledby="chatTitle" hidden>
+      <h4 id="chatTitle">Chat with us</h4>
+      <p class="chat-sub">Questions, suggestions, or want your business listed? Drop us a line — we usually reply within a day.</p>
+      <form class="modal-form" id="contactForm" novalidate>
+        <label>Your name (optional)
+          <input type="text" name="name" autocomplete="name" placeholder="Your name" />
+        </label>
+        <label>Email
+          <input type="email" name="email" autocomplete="email" placeholder="you@example.com" />
+        </label>
+        <label>Message
+          <textarea name="message" required minlength="2" placeholder="How can we help?"></textarea>
+        </label>
+        <button class="btn-submit" type="submit" id="contactSubmit">Send message</button>
+        <div class="form-status" id="contactStatus" aria-live="polite"></div>
+      </form>
+      <div class="alt-action">
+        or <a href="https://t.me/your_telegram_invite" target="_blank" rel="noreferrer">chat with us on Telegram &rarr;</a>
+      </div>
+    </aside>
+
+    <script src="../assets/config.js"></script>
+    <script src="../assets/search.js"></script>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

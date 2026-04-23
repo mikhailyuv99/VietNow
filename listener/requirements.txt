@@ -1,0 +1,5 @@
+telethon==1.36.0
+openai==1.54.4
+supabase==2.9.1
+python-dotenv==1.0.1
+tenacity==9.0.0
