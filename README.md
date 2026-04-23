@@ -25,7 +25,7 @@ Quick start: see `listener/README.md` for a 15–30 minute setup.
 
 Search and replace these placeholders in the HTML files:
 
-- Main community: `https://t.me/your_telegram_invite`
+- Main community: `https://t.me/vietnam_now44`
 - City hubs (optional): `https://t.me/your_telegram_city_hcmc` etc.
 
 ## Run locally (simple)
