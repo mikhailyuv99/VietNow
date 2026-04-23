@@ -8,7 +8,7 @@
 -- Notes:
 --   - "text_ru" holds the original Telegram text (we assume source is Russian).
 --   - "text_en" and "text_vi" are machine translations produced by the listener.
---   - "tsv" is a generated tsvector covering all three languages, used for full-text search.
+--   - "tsv" is maintained by trigger (Postgres rejects to_tsvector() in GENERATED columns — not IMMUTABLE).
 --   - Row-Level Security is enabled. Anonymous users get read-only access through the "anon" role.
 
 create extension if not exists "uuid-ossp";
@@ -34,14 +34,7 @@ create table if not exists public.messages (
     media_type      text,
     media_url       text,
 
-    tsv tsvector generated always as (
-        setweight(to_tsvector('simple', coalesce(text_ru, '')), 'A') ||
-        setweight(to_tsvector('simple', coalesce(text_en, '')), 'A') ||
-        setweight(to_tsvector('simple', coalesce(text_vi, '')), 'A') ||
-        setweight(to_tsvector('simple', coalesce(array_to_string(categories, ' '), '')), 'B') ||
-        setweight(to_tsvector('simple', coalesce(array_to_string(ai_tags,    ' '), '')), 'B') ||
-        setweight(to_tsvector('simple', coalesce(city, '')), 'B')
-    ) stored,
+    tsv             tsvector not null default ''::tsvector,
 
     inserted_at     timestamptz not null default now(),
     updated_at      timestamptz not null default now(),
@@ -63,10 +56,32 @@ begin
     return new;
 end$$;
 
+-- Full-text vector: rebuilt on every insert/update (cannot use GENERATED — to_tsvector is STABLE).
+create or replace function public.messages_rebuild_tsv()
+returns trigger
+language plpgsql
+as $$
+begin
+    new.tsv :=
+        setweight(to_tsvector('simple', coalesce(new.text_ru, '')), 'A') ||
+        setweight(to_tsvector('simple', coalesce(new.text_en, '')), 'A') ||
+        setweight(to_tsvector('simple', coalesce(new.text_vi, '')), 'A') ||
+        setweight(to_tsvector('simple', coalesce(array_to_string(new.categories, ' '), '')), 'B') ||
+        setweight(to_tsvector('simple', coalesce(array_to_string(new.ai_tags, ' '), '')), 'B') ||
+        setweight(to_tsvector('simple', coalesce(new.city, '')), 'B');
+    return new;
+end;
+$$;
+
+drop trigger if exists messages_set_tsv on public.messages;
+create trigger messages_set_tsv
+    before insert or update on public.messages
+    for each row execute function public.messages_rebuild_tsv();
+
 drop trigger if exists messages_set_updated_at on public.messages;
 create trigger messages_set_updated_at
     before update on public.messages
-    for each row execute procedure public.set_updated_at();
+    for each row execute function public.set_updated_at();
 
 -- Row-Level Security.
 alter table public.messages enable row level security;
