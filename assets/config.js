@@ -8,7 +8,7 @@
 window.VN_CONFIG = {
   // Project ref: wzopkceshvypksgpjzsx (VietNow)
   supabaseUrl: "https://wzopkceshvypksgpjzsx.supabase.co",
-  // Paste the green "anon" "public" key you copied (Settings → API → Legacy keys):
-  supabaseAnonKey: "YOUR-ANON-PUBLIC-KEY",
+  supabaseAnonKey:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6b3BrY2VzaHZ5cGtzZ3BqenN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5MzU1NzcsImV4cCI6MjA5MjUxMTU3N30.zGWXq_5BMawjeaTaBexC1TwuaDFkIbA8j3OvhS4fWFE",
   telegramChannel: "your_telegram_invite",
 };
