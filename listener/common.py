@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import OpenAI, RateLimitError
 from supabase import Client, create_client
 from tenacity import retry, stop_after_attempt, wait_exponential
 from telethon import TelegramClient
@@ -137,6 +137,11 @@ def _fallback_result() -> dict[str, Any]:
     }
 
 
+def _is_quota_exhausted(exc: BaseException) -> bool:
+    body = str(exc).lower()
+    return "insufficient_quota" in body or "exceeded your current quota" in body
+
+
 @retry(wait=wait_exponential(multiplier=1, min=2, max=30), stop=stop_after_attempt(4), reraise=True)
 def classify_and_translate(client: OpenAI, model: str, text_ru: str) -> dict[str, Any]:
     """Call the model and return a normalized dict. Safe against bad JSON."""
@@ -144,15 +149,21 @@ def classify_and_translate(client: OpenAI, model: str, text_ru: str) -> dict[str
     if not text:
         return _fallback_result()
 
-    response = client.chat.completions.create(
-        model=model,
-        temperature=0,
-        response_format={"type": "json_object"},
-        messages=[
-            {"role": "system", "content": _SYSTEM_PROMPT},
-            {"role": "user", "content": text[:4000]},
-        ],
-    )
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            temperature=0,
+            response_format={"type": "json_object"},
+            messages=[
+                {"role": "system", "content": _SYSTEM_PROMPT},
+                {"role": "user", "content": text[:4000]},
+            ],
+        )
+    except RateLimitError as exc:
+        if _is_quota_exhausted(exc):
+            log.warning("OpenAI quota/billing issue — storing message without AI tags/translations. Check billing at platform.openai.com")
+            return _fallback_result()
+        raise
     raw = response.choices[0].message.content or "{}"
 
     try:
