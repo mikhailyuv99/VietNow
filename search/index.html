@@ -5,39 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#ffffff" />
 
-    <title>Search Vietnam — Russians in Vietnam</title>
+    <title>Search — VietNow</title>
     <meta
       name="description"
-      content="Search the Russians-in-Vietnam Telegram community for hotels, services, freelancers, visa tips and more. Available in Russian, English and Vietnamese."
+      content="Search the VietNow Telegram community for hotels, services, freelancers, visa tips and more. Russian, English and Vietnamese."
     />
 
     <link rel="stylesheet" href="../assets/styles.css" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232563eb'/%3E%3Cpath d='M24 28a8 8 0 1 1 14 5l6 6' fill='none' stroke='%23ffffff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="icon" href="../assets/vietnow-mark.svg" type="image/svg+xml" />
   </head>
   <body class="search-app">
 
-    <!-- Minimal top bar: brand + Login / Sign up ---------------------- -->
     <header class="mini-bar">
       <div class="container">
         <div class="mini-bar-inner">
-          <a class="brand" href="../" aria-label="Home">
-            <span class="brand-badge" style="background: var(--brand-blue);">VN</span>
-            <span>Russians in Vietnam<small>Search the chat</small></span>
+          <a class="brand" href="../" aria-label="VietNow home">
+            <img class="brand-mark" src="../assets/vietnow-mark.svg" width="40" height="40" alt="" />
+            <span>VietNow<small>Search the chat</small></span>
           </a>
 
           <div class="mini-bar-actions">
-            <button class="link-btn" type="button" data-auth-open="login">Login</button>
-            <button class="brand-btn" type="button" data-auth-open="register">Sign up</button>
+            <a class="brand-btn brand-btn--outline" id="joinTgHeader" href="https://t.me/vietnam_now44" target="_blank" rel="noreferrer">Join Telegram</a>
+            <div class="mini-bar-auth-group" id="miniBarAuth">
+              <button class="link-btn" type="button" data-auth-open="login">Login</button>
+              <button class="brand-btn" type="button" data-auth-open="register">Sign up</button>
+            </div>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Hero search --------------------------------------------------- -->
     <main>
       <section class="hero-wrap">
         <div class="hero-inner">
-          <span class="hero-eyebrow"><span class="dot"></span> Powered by the community Telegram</span>
+          <span class="hero-eyebrow"><span class="dot"></span> Powered by the VietNow Telegram community</span>
           <h1 class="hero-title">
             What are you searching for <span class="accent">in Vietnam?</span>
           </h1>
@@ -47,6 +48,12 @@
           </p>
 
           <form class="hero-search" id="heroSearch" role="search" autocomplete="off">
+            <button type="button" class="hero-filter-btn" id="filterOpenBtn" aria-haspopup="dialog" aria-controls="filterModal" aria-expanded="false" title="Filters">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/>
+                <circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/><circle cx="10" cy="12" r="2" fill="currentColor" stroke="none"/><circle cx="14" cy="18" r="2" fill="currentColor" stroke="none"/>
+              </svg>
+            </button>
             <span class="icon" aria-hidden="true">⌕</span>
             <label class="sr-only" for="searchInput">Search the Telegram community</label>
             <input id="searchInput" type="search" placeholder="Try &quot;hotel in Hanoi&quot; or &quot;marketer in Da Nang&quot;…" />
@@ -63,20 +70,15 @@
         </div>
       </section>
 
-      <!-- Results + filters appear only after a search has been made -->
       <section class="results-wrap hidden" id="resultsWrap">
         <div class="results-toolbar">
-          <small><span id="resultsCount">0</span> <span id="resultsNoun">results</span></small>
-          <div class="toolbar-filters">
-            <div class="pill-row" id="timeRange" aria-label="Time range"></div>
-            <div class="pill-row" id="langToggle" aria-label="Show results in"></div>
+          <div class="results-toolbar-left">
+            <small><span id="resultsCount">0</span> <span id="resultsNoun">results</span></small>
+            <button type="button" class="filter-inline-btn" id="resultsFilterEditBtn" aria-controls="filterModal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/><circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/><circle cx="10" cy="12" r="2" fill="currentColor" stroke="none"/><circle cx="14" cy="18" r="2" fill="currentColor" stroke="none"/></svg>
+              <span id="filterSummaryShort">Filters</span>
+            </button>
           </div>
-        </div>
-        <div class="toolbar-filters" style="justify-content:center;">
-          <div class="pill-row" id="categoryChips" aria-label="Categories"></div>
-        </div>
-        <div class="toolbar-filters" style="justify-content:center;">
-          <div class="pill-row" id="cityChips" aria-label="Cities"></div>
         </div>
 
         <div id="results" aria-live="polite"></div>
@@ -84,7 +86,6 @@
         <button class="btn" id="loadMoreBtn" type="button" style="display:none;">Show more</button>
       </section>
 
-      <!-- FAQ ------------------------------------------------------- -->
       <section class="faq-section" aria-labelledby="faqTitle">
         <h2 id="faqTitle">Frequently asked questions</h2>
         <div class="faq-list">
@@ -94,28 +95,27 @@
           </details>
           <details class="faq-item">
             <summary>Is this available in English and Vietnamese?</summary>
-            <p>Yes. Most messages are written in Russian by the community, but each message is automatically translated into English and Vietnamese. Switch the language with the RU / EN / VI toggle above the results.</p>
+            <p>Yes. Most messages are written in Russian by the community, but each message is automatically translated into English and Vietnamese. Switch the language in the Filters panel.</p>
           </details>
           <details class="faq-item">
             <summary>How fresh are the results?</summary>
-            <p>New messages usually appear within a minute. You can filter by the last hour, 24 hours, week, month, or year to focus on what's most relevant to you.</p>
+            <p>New messages usually appear within a minute. Use Filters → Time range to focus on the last hour, day, week, month, or year.</p>
           </details>
           <details class="faq-item">
             <summary>How does search work under the hood?</summary>
-            <p>A small service reads the public community channel, tags each message by topic and city, and translates it. The website then searches those messages — just like a mini Google over the chat.</p>
+            <p>A small service reads the public community chat, tags each message by topic and city, and translates it. The website then searches those messages.</p>
           </details>
           <details class="faq-item">
             <summary>Can I add my business or remove a message?</summary>
-            <p>Yes. Use the chat bubble in the bottom right corner, or email us through the Contact link in the footer. We review every request manually.</p>
+            <p>Yes. Use the chat bubble in the bottom right corner, or the Contact link in the footer. We review every request manually.</p>
           </details>
         </div>
       </section>
     </main>
 
-    <!-- Legal footer -------------------------------------------------- -->
     <footer class="legal-footer">
       <div class="container legal-inner">
-        <span>© <span id="year"></span> Russians in Vietnam. Unofficial community resource.</span>
+        <span>© <span id="year"></span> VietNow. Community resource.</span>
         <nav class="legal-links" aria-label="Legal">
           <a href="../about/">About</a>
           <a href="../about/#rules">Terms</a>
@@ -125,7 +125,46 @@
       </div>
     </footer>
 
-    <!-- Auth modal --------------------------------------------------- -->
+    <!-- Filters modal -->
+    <div class="modal-backdrop filter-sheet" id="filterModal" role="dialog" aria-modal="true" aria-labelledby="filterModalTitle" hidden>
+      <div class="modal filter-sheet-panel" role="document">
+        <button class="modal-close" type="button" aria-label="Close filters" data-filter-close>×</button>
+        <h3 id="filterModalTitle" style="margin:0 0 4px;">Filters</h3>
+        <p class="modal-sub" style="margin:0 0 18px;">Language, time range, categories, and cities apply to your next search.</p>
+
+        <div class="filter-section">
+          <h4>Language</h4>
+          <label class="sr-only" for="fltLang">Result language</label>
+          <select id="fltLang" class="filter-select">
+            <option value="en">English</option>
+            <option value="ru">Russian</option>
+            <option value="vi">Vietnamese</option>
+          </select>
+        </div>
+
+        <div class="filter-section">
+          <h4>Time range</h4>
+          <label class="sr-only" for="fltTime">Time range</label>
+          <select id="fltTime" class="filter-select"></select>
+        </div>
+
+        <div class="filter-section">
+          <h4>Categories</h4>
+          <div id="fltCatGrid" class="filter-grid-check"></div>
+        </div>
+
+        <div class="filter-section">
+          <h4>Cities</h4>
+          <div id="fltCityGrid" class="filter-grid-check"></div>
+        </div>
+
+        <div class="filter-sheet-actions">
+          <button type="button" class="link-btn" id="fltClear" style="padding:10px 12px;">Clear all</button>
+          <button type="button" class="btn-submit" id="fltApply">Apply</button>
+        </div>
+      </div>
+    </div>
+
     <div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle" hidden>
       <div class="modal">
         <button class="modal-close" type="button" aria-label="Close" data-auth-close>×</button>
@@ -150,7 +189,6 @@
       </div>
     </div>
 
-    <!-- Floating contact chatbox ------------------------------------- -->
     <button class="chatbox-btn" id="chatboxBtn" type="button" aria-expanded="false" aria-controls="chatboxPanel" aria-label="Contact us">
       <span aria-hidden="true">✦</span>
     </button>
@@ -171,7 +209,7 @@
         <div class="form-status" id="contactStatus" aria-live="polite"></div>
       </form>
       <div class="alt-action">
-        or <a href="https://t.me/vietnam_now44" target="_blank" rel="noreferrer">chat with us on Telegram &rarr;</a>
+        or <a id="chatboxTgLink" href="https://t.me/vietnam_now44" target="_blank" rel="noreferrer">chat on Telegram &rarr;</a>
       </div>
     </aside>
 

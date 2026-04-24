@@ -10,6 +10,11 @@
   const $  = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
+  function tgUrl() {
+    const ch = String(cfg.telegramChannel || "vietnam_now44").replace(/^@/, "");
+    return `https://t.me/${ch}`;
+  }
+
   // --- Reference data -----------------------------------------------------
   const CATEGORIES = [
     { id: "housing",     label: "Housing" },
@@ -233,47 +238,142 @@
 
     if (!state.results.length) setStatus("No results yet. Try different words or widen the time range.");
     else setStatus("");
+    updateFilterSummary();
   }
 
-  // --- Filter UI (chips) --------------------------------------------------
-  function mountChips(containerId, items, field, getId, getLabel) {
-    const box = document.getElementById(containerId);
-    if (!box) return;
-    box.innerHTML = items.map((it) => {
-      const id = getId(it);
-      const label = getLabel(it);
-      const pressed = state[field].includes(id) ? "true" : "false";
-      return `<button class="pill" type="button" data-id="${escapeHtml(id)}" aria-pressed="${pressed}">${escapeHtml(label)}</button>`;
-    }).join("");
-    box.addEventListener("click", (ev) => {
-      const btn = ev.target.closest(".pill");
-      if (!btn) return;
-      const id = btn.getAttribute("data-id");
-      const pressed = btn.getAttribute("aria-pressed") === "true";
-      btn.setAttribute("aria-pressed", String(!pressed));
-      const set = new Set(state[field]);
-      if (!pressed) set.add(id); else set.delete(id);
-      state[field] = Array.from(set);
-      pushUrl();
-      runSearch({ reset: true });
+  // --- Filter modal -------------------------------------------------------
+  function langLabel(code) {
+    return { en: "EN", ru: "RU", vi: "VI" }[code] || code;
+  }
+
+  function updateFilterSummary() {
+    const el = $("#filterSummaryShort");
+    if (!el) return;
+    const parts = [langLabel(state.lang)];
+    const tr = TIME_RANGES.find((x) => x.id === state.range);
+    parts.push(tr ? tr.label : state.range);
+    if (state.categories.length) parts.push(`${state.categories.length} categories`);
+    if (state.cities.length) parts.push(`${state.cities.length} cities`);
+    el.textContent = parts.join(" · ");
+  }
+
+  function syncControlsFromState() {
+    const lang = $("#fltLang");
+    const time = $("#fltTime");
+    if (lang) lang.value = state.lang;
+    if (time) time.value = state.range;
+    $$("#fltCatGrid input[type=checkbox]").forEach((inp) => {
+      inp.checked = state.categories.includes(inp.value);
+    });
+    $$("#fltCityGrid input[type=checkbox]").forEach((inp) => {
+      inp.checked = state.cities.includes(inp.value);
     });
   }
 
-  function mountSingleChoice(containerId, items, field, onChange) {
-    const box = document.getElementById(containerId);
-    if (!box) return;
-    box.innerHTML = items.map((r) => {
-      const pressed = state[field] === r.id ? "true" : "false";
-      return `<button class="pill" type="button" data-id="${r.id}" aria-pressed="${pressed}">${escapeHtml(r.label)}</button>`;
-    }).join("");
-    box.addEventListener("click", (ev) => {
-      const btn = ev.target.closest(".pill");
-      if (!btn) return;
-      state[field] = btn.getAttribute("data-id");
-      $$(".pill", box).forEach((p) => p.setAttribute("aria-pressed", p.getAttribute("data-id") === state[field] ? "true" : "false"));
-      pushUrl();
-      onChange();
+  function readControlsIntoState() {
+    const lang = $("#fltLang");
+    const time = $("#fltTime");
+    if (lang) state.lang = lang.value || "en";
+    if (time) state.range = time.value || "year";
+    state.categories = $$("#fltCatGrid input[type=checkbox]:checked").map((i) => i.value);
+    state.cities = $$("#fltCityGrid input[type=checkbox]:checked").map((i) => i.value);
+  }
+
+  function openFilterModal() {
+    const modal = $("#filterModal");
+    const openBtn = $("#filterOpenBtn");
+    if (!modal) return;
+    syncControlsFromState();
+    modal.classList.add("open");
+    modal.hidden = false;
+    if (openBtn) openBtn.setAttribute("aria-expanded", "true");
+  }
+
+  function closeFilterModal() {
+    const modal = $("#filterModal");
+    const openBtn = $("#filterOpenBtn");
+    if (!modal) return;
+    modal.classList.remove("open");
+    modal.hidden = true;
+    if (openBtn) openBtn.setAttribute("aria-expanded", "false");
+  }
+
+  function mountFilterModal() {
+    const timeSel = $("#fltTime");
+    const catGrid = $("#fltCatGrid");
+    const cityGrid = $("#fltCityGrid");
+    if (!timeSel || !catGrid || !cityGrid) return;
+
+    timeSel.innerHTML = TIME_RANGES.map((r) =>
+      `<option value="${escapeHtml(r.id)}">${escapeHtml(r.label)}</option>`
+    ).join("");
+
+    catGrid.innerHTML = CATEGORIES.map((c) => `
+      <label class="filter-check">
+        <input type="checkbox" name="flt-cat" value="${escapeHtml(c.id)}" />
+        <span>${escapeHtml(c.label)}</span>
+      </label>
+    `).join("");
+
+    cityGrid.innerHTML = CITIES.map((city) => `
+      <label class="filter-check">
+        <input type="checkbox" name="flt-city" value="${escapeHtml(city)}" />
+        <span>${escapeHtml(city)}</span>
+      </label>
+    `).join("");
+
+    const openers = [$("#filterOpenBtn"), $("#resultsFilterEditBtn")].filter(Boolean);
+    openers.forEach((btn) => btn.addEventListener("click", () => openFilterModal()));
+
+    const filterBackdrop = $("#filterModal");
+    if (filterBackdrop) {
+      $$("[data-filter-close]", filterBackdrop).forEach((b) =>
+        b.addEventListener("click", () => closeFilterModal())
+      );
+      filterBackdrop.addEventListener("click", (ev) => {
+        if (ev.target === filterBackdrop) closeFilterModal();
+      });
+    }
+
+    const fltApply = $("#fltApply");
+    if (fltApply) {
+      fltApply.addEventListener("click", () => {
+        readControlsIntoState();
+        pushUrl();
+        updateFilterSummary();
+        closeFilterModal();
+        const hasQuery = !!(state.q || state.categories.length || state.cities.length);
+        if (hasQuery) runSearch({ reset: true });
+        else renderResults();
+      });
+    }
+
+    const fltClear = $("#fltClear");
+    if (fltClear) {
+      fltClear.addEventListener("click", () => {
+        state.categories = [];
+        state.cities = [];
+        state.range = "year";
+        state.lang = "en";
+        syncControlsFromState();
+        pushUrl();
+        updateFilterSummary();
+        const hasQuery = !!(state.q || state.categories.length || state.cities.length);
+        if (hasQuery) runSearch({ reset: true });
+        else renderResults();
+      });
+    }
+
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key !== "Escape") return;
+      const fm = $("#filterModal");
+      if (fm && fm.classList.contains("open")) {
+        closeFilterModal();
+        ev.preventDefault();
+      }
     });
+
+    updateFilterSummary();
   }
 
   // --- Hero search form ---------------------------------------------------
@@ -395,13 +495,12 @@
 
   function renderSession() {
     const raw = localStorage.getItem("vn_session");
-    if (!raw) return;
+    const box = $("#miniBarAuth");
+    if (!box || !raw) return;
     try {
       const { email } = JSON.parse(raw);
       if (!email) return;
-      const actions = $(".mini-bar-actions");
-      if (!actions) return;
-      actions.innerHTML = `
+      box.innerHTML = `
         <span class="link-btn" aria-disabled="true" title="${escapeHtml(email)}">${escapeHtml(email.split("@")[0])}</span>
         <button class="link-btn" type="button" id="logoutBtn">Log out</button>
       `;
@@ -483,22 +582,20 @@
 
   // --- Boot ---------------------------------------------------------------
   document.addEventListener("DOMContentLoaded", () => {
+    const join = $("#joinTgHeader");
+    if (join) join.href = tgUrl();
+    const chatTg = $("#chatboxTgLink");
+    if (chatTg) chatTg.href = tgUrl();
+
     mountHero();
-    mountChips("categoryChips", CATEGORIES, "categories", (c) => c.id, (c) => c.label);
-    mountChips("cityChips", CITIES.map((c) => ({ id: c })), "cities", (c) => c.id, (c) => c.id);
-    mountSingleChoice("timeRange", TIME_RANGES, "range", () => runSearch({ reset: true }));
-    mountSingleChoice("langToggle",
-      [{ id: "en", label: "EN" }, { id: "ru", label: "RU" }, { id: "vi", label: "VI" }],
-      "lang",
-      () => renderResults()
-    );
+    mountFilterModal();
     mountAuth();
     mountChatbox();
     renderSession();
 
-    // If the URL already has a query, run it immediately.
     if (state.q || state.categories.length || state.cities.length) {
       runSearch({ reset: true });
     }
+    updateFilterSummary();
   });
 })();

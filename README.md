@@ -1,6 +1,6 @@
-# Russians in Vietnam — website
+# VietNow — website
 
-This is a lightweight **static website** for a Telegram community: Russians living/traveling/doing business in Vietnam.
+This is a lightweight **static website** for the **VietNow** Telegram community (Vietnam).
 
 ## Pages
 
